@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         pager = findViewById(R.id.pager)
         navPill = findViewById(R.id.navPill)
         tabs = listOf(R.id.tabHome, R.id.tabExplore, R.id.tabActivity, R.id.tabSettings)
-            .map { id -> findViewById<android.view.View>(id) }
+            .map { id -> findViewById<LinearLayout>(id) }
         icons = listOf(R.id.homeTabIcon, R.id.exploreTabIcon, R.id.activityTabIcon, R.id.settingsTabIcon).map { id -> findViewById<android.widget.ImageView>(id) }
         labels = listOf(R.id.homeTabLabel, R.id.exploreTabLabel, R.id.activityTabLabel, R.id.settingsTabLabel).map { id -> findViewById<android.widget.TextView>(id) }
 

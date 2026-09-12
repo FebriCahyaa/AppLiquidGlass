@@ -1,31 +1,48 @@
-# Apple Liquid Glass Template
+# AppLiquidGlass
 
-Native Android Kotlin + XML template inspired by modern Apple Liquid Glass concepts.
+Complete dual-target Liquid Glass foundation.
 
-## Features
-- Dynamic glass-style surfaces and translucent layers
-- Animated floating navbar pill
-- Light and dark resources
-- XML Views, no Compose
-- GitHub Actions debug APK build
+## Android
+- Kotlin
+- Jetpack Compose
+- Material 3
+- Animated content transitions
+- Swipe navigation
+- Light/dark support
+- Existing XML/ViewPager2 fallback retained for safe migration
 
-## Build locally
+## Flutter
+- Dart 3
+- Material 3
+- GoRouter
+- BackdropFilter glass surfaces
+- Animated navigation
+- Swipe navigation
+
+## Android build
+
 ```bash
-gradle :app:assembleDebug
+./gradlew lintDebug
+./gradlew assembleDebug
 ```
 
-APK: `app/build/outputs/apk/debug/app-debug.apk`
+## Flutter build
+
+```bash
+cd flutter
+flutter pub get
+flutter analyze
+flutter test
+flutter build apk
+```
+
+The XML activity remains the stable launcher. `LiquidGlassComposeActivity` is available as the Compose implementation and can be made the launcher after visual parity testing.
 
 ## GitHub Actions
-Push to `main` or `master`, or run **Android Debug APK** manually from Actions. The generated APK is uploaded as an artifact.
 
-## Android 17 / API 37 support
+The repository now includes separate workflows:
 
-- `compileSdk = 37` and `targetSdk = 37`.
-- Edge-to-edge window configuration with safe fallback.
-- Android 12+ blur capability detection via `Android17Features.supportsBlur()`.
-- Android 13+ modern back capability detection via `Android17Features.supportsModernBack()`.
-- `android:enableOnBackInvokedCallback="true"` enabled for modern back navigation.
-- Maintains `minSdk = 26` for broad compatibility.
+- `android.yml`: validation, duplicate-ID check, lint, unit tests, debug APK build, and APK artifact upload.
+- `flutter.yml`: dependency installation, formatting, analyzer, tests, debug APK build, and APK artifact upload.
 
-> Android 17-only platform APIs should be added only after their final SDK signatures are available. The compatibility layer avoids referencing unavailable APIs directly, so older devices continue to work.
+Both workflows support `push`, pull requests, and manual `workflow_dispatch`.
