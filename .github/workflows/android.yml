@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 env:
-  JAVA_VERSION: "17"
+  ANDROID_API: "36"
   ANDROID_BUILD_TOOLS: "36.0.0"
 
 jobs:
@@ -35,103 +35,52 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Detect Android platform
-        id: android-platform
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          echo "Checking available Android SDK platforms..."
-
-          SDK_LIST="$(sdkmanager --list --channel=3 2>/dev/null || true)"
-
-          PLATFORM_PACKAGE="$(
-            printf '%s\n' "$SDK_LIST" |
-              grep -oE 'platforms;android-37(\.0)?' |
-              sort -u |
-              head -n 1
-          )"
-
-          if [ -n "$PLATFORM_PACKAGE" ]; then
-            echo "platform=$PLATFORM_PACKAGE" >> "$GITHUB_OUTPUT"
-            echo "api=37" >> "$GITHUB_OUTPUT"
-            echo "compile_api=37" >> "$GITHUB_OUTPUT"
-            echo "Android API 37 detected: $PLATFORM_PACKAGE"
-          else
-            echo "::warning::Android API 37 is unavailable on this runner."
-            echo "::warning::Using stable Android API 36 fallback."
-
-            echo "platform=platforms;android-36" >> "$GITHUB_OUTPUT"
-            echo "api=36" >> "$GITHUB_OUTPUT"
-            echo "compile_api=36" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Install Android SDK packages
         shell: bash
-        env:
-          PLATFORM_PACKAGE: ${{ steps.android-platform.outputs.platform }}
         run: |
           set -euo pipefail
 
-          yes | sdkmanager --licenses >/dev/null || true
+          yes | sdkmanager --licenses >/dev/null 2>/dev/null || true
 
           sdkmanager \
             "platform-tools" \
-            "build-tools;${ANDROID_BUILD_TOOLS}" \
-            "${PLATFORM_PACKAGE}"
+            "platforms;android-36" \
+            "build-tools;36.0.0"
 
       - name: Verify Android SDK
         shell: bash
-        env:
-          PLATFORM_PACKAGE: ${{ steps.android-platform.outputs.platform }}
         run: |
           set -euo pipefail
 
-          sdkmanager --list >/dev/null
+          test -d "${ANDROID_HOME}/platforms/android-36"
+          test -d "${ANDROID_HOME}/build-tools/36.0.0"
 
-          if [ ! -d "${ANDROID_HOME}/${PLATFORM_PACKAGE}" ]; then
-            echo "::error::Required Android platform was not installed: ${PLATFORM_PACKAGE}"
-            exit 1
-          fi
-
-          echo "Installed platform: ${PLATFORM_PACKAGE}"
+          echo "Android API 36 tersedia."
+          echo "Build Tools 36.0.0 tersedia."
 
       - name: Make Gradle executable
         shell: bash
         run: |
           set -euo pipefail
 
-          if [ -f "./gradlew" ]; then
-            chmod +x ./gradlew
-          else
+          if [ ! -f "./gradlew" ]; then
             echo "::error::gradlew tidak ditemukan."
-            echo "::error::Tambahkan Gradle Wrapper ke repository."
             exit 1
           fi
 
+          chmod +x ./gradlew
+
       - name: Validate Gradle
-        shell: bash
-        run: |
-          set -euo pipefail
-          ./gradlew --version
+        run: ./gradlew --version
 
       - name: Lint
-        shell: bash
-        run: |
-          set -euo pipefail
-          ./gradlew lintDebug --stacktrace
+        run: ./gradlew lintDebug --stacktrace
 
       - name: Unit tests
-        shell: bash
-        run: |
-          set -euo pipefail
-          ./gradlew testDebugUnitTest --stacktrace
+        run: ./gradlew testDebugUnitTest --stacktrace
 
       - name: Assemble debug APK
-        shell: bash
-        run: |
-          set -euo pipefail
-          ./gradlew assembleDebug --stacktrace
+        run: ./gradlew assembleDebug --stacktrace
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
