@@ -1,0 +1,74 @@
+name: Flutter Formatting
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - "flutter/**"
+      - ".github/workflows/flutter-format.yml"
+  pull_request:
+    paths:
+      - "flutter/**"
+      - ".github/workflows/flutter-format.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: flutter-format-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  format:
+    name: Format Flutter source
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: flutter
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Show Flutter and Dart versions
+        run: |
+          flutter --version
+          dart --version
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Format Dart files
+        run: dart format lib test
+
+      - name: Check formatting
+        run: dart format --output=none --set-exit-if-changed lib test
+
+      - name: Commit formatted files
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        working-directory: .
+        run: |
+          if git diff --quiet; then
+            echo "No formatting changes required."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add flutter/lib flutter/test
+          git commit -m "style: format Flutter source"
+          git push

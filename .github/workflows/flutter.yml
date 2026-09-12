@@ -37,8 +37,13 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Format Dart files
+        working-directory: flutter
+        run: dart format lib test
+
       - name: Check Dart formatting
-        run: dart format --output=none --set-exit-if-changed .
+        working-directory: flutter
+        run: dart format --output=none --set-exit-if-changed lib test
 
       - name: Analyze Flutter source
         run: flutter analyze
