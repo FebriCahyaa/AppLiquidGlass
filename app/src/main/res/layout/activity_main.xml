@@ -76,6 +76,7 @@
                     <TextView android:id="@+id/tabLabel" android:text="Settings" style="@style/GlassTabLabel"/>
                 </LinearLayout>
                 </LinearLayout>
+            </FrameLayout>
         </FrameLayout>
     </LinearLayout>
 </FrameLayout>
