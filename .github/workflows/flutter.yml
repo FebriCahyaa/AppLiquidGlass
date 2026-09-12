@@ -2,15 +2,9 @@ name: Flutter CI
 
 on:
   push:
-    branches:
-      - main
-      - master
-      - develop
+    branches: [main, master, develop]
   pull_request:
-    branches:
-      - main
-      - master
-      - develop
+    branches: [main, master, develop]
   workflow_dispatch:
 
 permissions:
@@ -24,11 +18,9 @@ jobs:
   flutter:
     name: Flutter analyze, test and build
     runs-on: ubuntu-latest
-
     defaults:
       run:
         working-directory: flutter
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -51,7 +43,7 @@ jobs:
       - name: Analyze Flutter source
         run: flutter analyze
 
-      - name: Run tests
+      - name: Run Flutter tests
         run: flutter test --no-pub
 
       - name: Build debug APK
@@ -61,7 +53,7 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: app-liquid-glass-debug
+          name: app-liquid-glass-flutter-debug
           path: flutter/build/app/outputs/flutter-apk/app-debug.apk
           if-no-files-found: error
           retention-days: 14
