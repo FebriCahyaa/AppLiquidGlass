@@ -8,16 +8,16 @@ android {
     namespace = "com.febri.liquidglass"
     compileSdk = 36
 
-    buildFeatures {
-        compose = true
-    }
-
     defaultConfig {
         applicationId = "com.febri.liquidglass"
         minSdk = 26
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
+    }
+
+    buildFeatures {
+        compose = true
     }
 }
 
@@ -26,6 +26,7 @@ kotlin {
 }
 
 dependencies {
+    implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.core:core-ktx:1.15.0")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("androidx.viewpager2:viewpager2:1.1.0")

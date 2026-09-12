@@ -1,3 +1,7 @@
+import androidx.compose.animation.togetherWith
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.ContentTransform
 package com.febri.liquidglass.ui
 
 import android.os.Bundle
@@ -23,9 +27,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Explore
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Insights
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -114,7 +116,7 @@ fun LiquidGlassApp() {
             ) {
                 AnimatedContent(
                     targetState = selected,
-                    transitionSpec = { tween(280, easing = FastOutSlowInEasing) },
+                    transitionSpec = { fadeIn() togetherWith fadeOut() },
                     label = "glass-page"
                 ) { index ->
                     GlassPage(destinations[index], isDark)
@@ -188,7 +190,7 @@ private fun GlassCard(destination: GlassDestination, isDark: Boolean) {
 @Composable
 private fun GlassNavigation(selected: Int, onSelected: (Int) -> Unit, isDark: Boolean) {
     val labels = listOf("Home", "Explore", "Activity", "Settings")
-    val icons = listOf(Icons.Outlined.Home, Icons.Outlined.Explore, Icons.Outlined.Insights, Icons.Outlined.Settings)
+    val icons = listOf(Icons.Outlined.Home, Icons.Outlined.Search, Icons.Outlined.Analytics, Icons.Outlined.Settings)
     val navColor = if (isDark) Color(0x331F1F2C) else Color.White.copy(alpha = .80f)
 
     Row(
