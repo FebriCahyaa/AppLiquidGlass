@@ -101,9 +101,12 @@ class LiquidGlassBackground extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         Container(color: LiquidGlassColors.ink),
-        Positioned(top: -150, left: -110, child: _orb(LiquidGlassColors.violet, 340)),
-        Positioned(top: 180, right: -160, child: _orb(LiquidGlassColors.cyan, 360)),
-        Positioned(bottom: -180, left: 40, child: _orb(LiquidGlassColors.pink, 380)),
+        Positioned(
+            top: -150, left: -110, child: _orb(LiquidGlassColors.violet, 340)),
+        Positioned(
+            top: 180, right: -160, child: _orb(LiquidGlassColors.cyan, 360)),
+        Positioned(
+            bottom: -180, left: 40, child: _orb(LiquidGlassColors.pink, 380)),
         child,
       ],
     );
