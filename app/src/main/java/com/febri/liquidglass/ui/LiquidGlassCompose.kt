@@ -187,7 +187,7 @@ private fun GlassCard(destination: GlassDestination, isDark: Boolean) {
 @Composable
 private fun GlassNavigation(selected: Int, onSelected: (Int) -> Unit, isDark: Boolean) {
     val labels = listOf("Home", "Explore", "Activity", "Settings")
-    val icons = listOf(Icons.Outlined.Home, Icons.Outlined.Search, Icons.Outlined.Analytics, Icons.Outlined.Settings)
+    val icons = listOf(Icons.Outlined.Home, Icons.Outlined.Search, Icons.Outlined.BarChart, Icons.Outlined.Settings)
     val navColor = if (isDark) Color(0x331F1F2C) else Color.White.copy(alpha = .80f)
 
     Row(
