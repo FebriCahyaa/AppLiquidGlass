@@ -101,9 +101,9 @@ class _GlassPage extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
-              color: dark ? Colors.white.withOpacity(.10) : Colors.white.withOpacity(.72),
+              color: dark ? Colors.white.withValues(alpha: 0.10) : Colors.white.withValues(alpha: 0.72),
               borderRadius: BorderRadius.circular(28),
-              border: Border.all(color: Colors.white.withOpacity(.35)),
+              border: Border.all(color: Colors.white.withValues(alpha: 0.35)),
             ),
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               const Text('LIQUID GLASS SYSTEM', style: TextStyle(color: violet, fontWeight: FontWeight.bold, fontSize: 12)),
@@ -135,7 +135,7 @@ class _GlassNavigation extends StatelessWidget {
         filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
         child: Container(
           padding: const EdgeInsets.all(6),
-          color: dark ? const Color(0x331F1F2C) : Colors.white.withOpacity(.80),
+          color: dark ? const Color(0x331F1F2C) : Colors.white.withValues(alpha: 0.80),
           child: Row(
             children: List.generate(labels.length, (index) {
               final active = index == selected;
