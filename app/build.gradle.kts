@@ -1,7 +1,7 @@
 plugins { id("com.android.application"); id("org.jetbrains.kotlin.android") }
 
-android { namespace = "com.febri.liquidglass"; compileSdk = 37
-    defaultConfig { applicationId = "com.febri.liquidglass"; minSdk = 26; targetSdk = 37; versionCode = 1; versionName = "1.0" }
+android { namespace = "com.febri.liquidglass"; compileSdk = 36
+    defaultConfig { applicationId = "com.febri.liquidglass"; minSdk = 26; targetSdk = 36; versionCode = 1; versionName = "1.0" }
 }
 
 kotlin { jvmToolchain(17) }
