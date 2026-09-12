@@ -46,6 +46,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.material.icons.filled.Assessment
 
 private val Violet = Color(0xFF6C5CE7)
 private val Cyan = Color(0xFF00B8B5)
