@@ -57,23 +57,23 @@
                     android:orientation="horizontal">
 
                 <LinearLayout android:id="@+id/tabHome" style="@style/GlassTab">
-                    <ImageView android:id="@+id/tabIcon" android:src="@drawable/ic_home" style="@style/GlassTabIcon"/>
-                    <TextView android:id="@+id/tabLabel" android:text="Home" style="@style/GlassTabLabel"/>
+                    <ImageView android:id="@+id/homeTabIcon" android:src="@drawable/ic_home" style="@style/GlassTabIcon"/>
+                    <TextView android:id="@+id/homeTabLabel" android:text="Home" style="@style/GlassTabLabel"/>
                 </LinearLayout>
 
                 <LinearLayout android:id="@+id/tabExplore" style="@style/GlassTab">
-                    <ImageView android:id="@+id/tabIcon" android:src="@drawable/ic_compass" style="@style/GlassTabIcon"/>
-                    <TextView android:id="@+id/tabLabel" android:text="Explore" style="@style/GlassTabLabel"/>
+                    <ImageView android:id="@+id/exploreTabIcon" android:src="@drawable/ic_compass" style="@style/GlassTabIcon"/>
+                    <TextView android:id="@+id/exploreTabLabel" android:text="Explore" style="@style/GlassTabLabel"/>
                 </LinearLayout>
 
                 <LinearLayout android:id="@+id/tabActivity" style="@style/GlassTab">
-                    <ImageView android:id="@+id/tabIcon" android:src="@drawable/ic_activity" style="@style/GlassTabIcon"/>
-                    <TextView android:id="@+id/tabLabel" android:text="Activity" style="@style/GlassTabLabel"/>
+                    <ImageView android:id="@+id/activityTabIcon" android:src="@drawable/ic_activity" style="@style/GlassTabIcon"/>
+                    <TextView android:id="@+id/activityTabLabel" android:text="Activity" style="@style/GlassTabLabel"/>
                 </LinearLayout>
 
                 <LinearLayout android:id="@+id/tabSettings" style="@style/GlassTab">
-                    <ImageView android:id="@+id/tabIcon" android:src="@drawable/ic_settings" style="@style/GlassTabIcon"/>
-                    <TextView android:id="@+id/tabLabel" android:text="Settings" style="@style/GlassTabLabel"/>
+                    <ImageView android:id="@+id/settingsTabIcon" android:src="@drawable/ic_settings" style="@style/GlassTabIcon"/>
+                    <TextView android:id="@+id/settingsTabLabel" android:text="Settings" style="@style/GlassTabLabel"/>
                 </LinearLayout>
                 </LinearLayout>
             </FrameLayout>

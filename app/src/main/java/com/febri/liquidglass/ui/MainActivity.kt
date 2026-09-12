@@ -33,9 +33,9 @@ class MainActivity : AppCompatActivity() {
         pager = findViewById(R.id.pager)
         navPill = findViewById(R.id.navPill)
         tabs = listOf(R.id.tabHome, R.id.tabExplore, R.id.tabActivity, R.id.tabSettings)
-            .map(::findViewById)
-        icons = listOf(R.id.homeTabIcon, R.id.exploreTabIcon, R.id.activityTabIcon, R.id.settingsTabIcon).map(::findViewById)
-        labels = listOf(R.id.homeTabLabel, R.id.exploreTabLabel, R.id.activityTabLabel, R.id.settingsTabLabel).map(::findViewById)
+            .map { id -> findViewById<android.view.View>(id) }
+        icons = listOf(R.id.homeTabIcon, R.id.exploreTabIcon, R.id.activityTabIcon, R.id.settingsTabIcon).map { id -> findViewById<android.widget.ImageView>(id) }
+        labels = listOf(R.id.homeTabLabel, R.id.exploreTabLabel, R.id.activityTabLabel, R.id.settingsTabLabel).map { id -> findViewById<android.widget.TextView>(id) }
 
         pager.adapter = GlassPagerAdapter(this)
         pager.offscreenPageLimit = 4
