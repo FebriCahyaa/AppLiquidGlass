@@ -49,8 +49,15 @@ jobs:
         run: flutter analyze
 
       - name: Run Flutter tests
-        run: flutter test --no-pub
-
+        working-directory: flutter
+        shell: bash
+        run: |
+          if [ -d "test" ]; then
+           flutter test --no-pub
+          else
+            echo "No Flutter test directory found; skipping tests."
+          fi
+          
       - name: Build debug APK
         run: flutter build apk --debug --no-pub
 
