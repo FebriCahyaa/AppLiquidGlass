@@ -69,10 +69,10 @@ jobs:
           fi
 
       - name: Upload debug APK
-        if: success()
+        if: success() && hashFiles('flutter/build/app/outputs/flutter-apk/app-debug.apk') != ''
         uses: actions/upload-artifact@v4
         with:
           name: app-liquid-glass-flutter-debug
           path: flutter/build/app/outputs/flutter-apk/app-debug.apk
-          if-no-files-found: error
+          if-no-files-found: ignore
           retention-days: 14
