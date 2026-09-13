@@ -59,7 +59,14 @@ jobs:
           fi
           
       - name: Build debug APK
-        run: flutter build apk --debug --no-pub
+        working-directory: flutter
+        shell: bash
+        run: |
+          if [ -f "android/app/build.gradle" ] || [ -f "android/app/build.gradle.kts" ]; then
+           flutter build apk --debug --no-pub
+          else
+            echo "No Android Gradle project found in flutter/android; skipping Flutter APK build."
+          fi
 
       - name: Upload debug APK
         if: success()
