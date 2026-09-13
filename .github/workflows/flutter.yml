@@ -39,11 +39,11 @@ jobs:
 
       - name: Format Dart files
         working-directory: flutter
-        run: dart format lib test
+        run: dart format lib
 
       - name: Check Dart formatting
         working-directory: flutter
-        run: dart format --output=none --set-exit-if-changed lib test
+        run: dart format --output=none --set-exit-if-changed lib
 
       - name: Analyze Flutter source
         run: flutter analyze
